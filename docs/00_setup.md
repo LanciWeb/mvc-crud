@@ -37,3 +37,40 @@ Once a database and its table have been configured on mySQL, we need to connect 
 ## Create a config file
 
 In the `db` folder, create a `config.php` file that serve as a container for all credentials. It will contain static variables used to establish connection to the database.
+
+## Create a Database Class file
+
+In the `db` folder, create a `Database.php` file which will represent the instance of a database and connect to MySQL.
+
+It will use `PDO` and our `CONFIG` class to connect to the database.
+It also creates a static instance of itself to be referred to in other classes.
+
+```php
+<?php
+namespace app;
+
+use PDO;
+use app\CONFIG;
+
+class Database
+{
+  public $pdo;
+
+  public static $db;
+
+  public function __construct()
+  {
+    $this->dbms = CONFIG::$dbms;
+    $this->host = CONFIG::$host;
+    $this->port = CONFIG::$port;
+    $this->db_name = CONFIG::$db_name;
+    $this->user = CONFIG::$user;
+    $this->password = CONFIG::$password;
+
+    $dsn = "$this->dbms:host=$this->host;port=$this->port;dbname=$this->db_name";
+    $this->pdo = new PDO($dsn, $this->user, $this->password);
+    $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    self::$db = $this;
+  }
+}
+```
