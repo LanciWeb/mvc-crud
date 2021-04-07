@@ -1,0 +1,12 @@
+{
+    "name": "lance/mvc-crud",
+    "description": "A simple MVC CRUD PHP project for class purposes",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Marco Lancellotti",
+            "email": "lancellotti.marco@yahoo.it"
+        }
+    ],
+    "require": {}
+}
