@@ -79,3 +79,40 @@ At the end of the entry file (`public/index.php`), after the list of all the rou
 ```php
 $router->resolve();
 ```
+
+# 3 Rendering the routes
+
+## In the Router
+
+In order to actually render the route, we need a `renderView` function. It accepts the file name of the view, and an optional associative array of parameters.
+
+As a first step, we loop over the parameters and create a variable per each item whose variable name corresponds to the item key in the original parameter array.
+
+As a second step, we first create the path to the proper file indicated by the `$view` variable.
+
+> If we use `include_once`, it would print the output directly in the browser, but we need to store it in the `$content` variable and make it visible to the layout file.
+
+We can store the output of the file using caching methods.
+
+> `ob_start()` starts the caching so any following `echo` or `include` will print its output inside a local buffer.
+
+> `ob_get_clean()` returns the content of the buffer and cleans it afterwards.
+
+We can assign `ob_get_clean()` to the `$content` variable and then include the `_layout.php` file so that it will return the layout and have access to the `$content`.
+
+```php
+public function renderView($view, $params = [])
+  {
+    foreach ($params as $key => $value) {
+      $$key = $value;
+    }
+
+    ob_start();
+    include_once __DIR__ . "/views/$view.php";
+    $content = ob_get_clean(); // $content viene usato in layout.php
+
+    include_once __DIR__ . "/views/_layout.php";
+  }
+```
+
+This function will be invoked by the Controller's methods, since they are passed the Router instance in the `resolve` function

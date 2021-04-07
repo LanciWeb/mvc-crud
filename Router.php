@@ -44,4 +44,17 @@ class Router
     //! accepts array($className, $methodName) as first param
     else call_user_func($fn, $this);
   }
+
+  public function renderView($view, $params = [])
+  {
+    foreach ($params as $key => $value) {
+      $$key = $value;
+    }
+
+    ob_start();
+    include_once __DIR__ . "/views/$view.php";
+    $content = ob_get_clean(); // $content viene usato in layout.php
+
+    include_once __DIR__ . "/views/_layout.php";
+  }
 }
