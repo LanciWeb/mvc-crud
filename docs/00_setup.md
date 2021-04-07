@@ -131,3 +131,22 @@ class Product
   }
 }
 ```
+
+# 7 Create a Product Controller
+
+In the root, create a `controllers` folder. Inside, create a `ProductController.php` file that will serve as a controller for the products. We can insert 4 methods that represent the 4 CRUD operations.
+
+```php
+namespace app\controllers;
+
+class ProductController
+{
+  public function index(){}
+
+  public function create(){}
+
+  public function update(){}
+
+  public function delete(){}
+}
+```
