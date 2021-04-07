@@ -29,3 +29,11 @@ In the entry file we need to require once the `autoload.php` file from the vendo
 ```php
 require_once('../vendor/autoload.php');
 ```
+
+# 4 Setup Database Connection
+
+Once a database and its table have been configured on mySQL, we need to connect to the database. First of all, create a `db` folder in the root.
+
+## Create a config file
+
+In the `db` folder, create a `config.php` file that serve as a container for all credentials. It will contain static variables used to establish connection to the database.
