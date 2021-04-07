@@ -150,3 +150,26 @@ class ProductController
   public function delete(){}
 }
 ```
+
+# 8 Create the Router
+
+In the root folder, create a `Router.php` file. This Router class will be used in the entry file to take care of all routes. It will intercept the requests, map them wiht the right controller and function, and return the proper view. Also, it is this file that instantiate the Database class in the project.
+
+```php
+namespace app;
+
+use app\Database;
+
+class Router
+{
+  public $getRoutes = [];
+  public $postRoutes = [];
+
+  public $db;
+
+  public function __construct()
+  {
+    $this->db = new Database();
+  }
+}
+```
