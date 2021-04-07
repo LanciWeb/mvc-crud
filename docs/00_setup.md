@@ -17,3 +17,7 @@ We need to specify a root for our `app` namespace.
 
 After that run `composer update` in the terminal.
 Now all files in our root folder will have the app namespace.
+
+# 3 Create entry file
+
+Create a `public` folder and an `index.php` file. This file will handle all requests through a Router class. For now just print a hello world message, then go into public folder in terminal and run `php -S localhost:8080` to run the PHP built-in server.
