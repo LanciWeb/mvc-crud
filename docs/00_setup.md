@@ -103,3 +103,31 @@ In the root folder, create a `views` folder with a `_layout.php` folder which wi
   </body>
 </html>
 ```
+
+# 6 Create a Product Model
+
+In the root, create a `models` folder. Inside, create a `Product.php` file that will represent the model for a Product:
+
+```php
+namespace app\models;
+
+class Product
+{
+  public $id = null;
+  public $title = null;
+  public $price = null;
+  public $description = null;
+  public $imagePath = null;
+  public $imageFile = null;
+
+  public function load($data)
+  {
+    //Some logics to load the data into a Product instance
+  }
+
+  public function save()
+  {
+    //Some logics to save the product to the database
+  }
+}
+```
