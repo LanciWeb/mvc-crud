@@ -5,7 +5,7 @@ In the `Database` class we need to add a function to fetch all the products from
 ```php
 public function getProducts()
   {
-    $statement = $this->pdo->prepare('SELECT * FROM products ORDER_BY create_date DESC');
+    $statement = $this->pdo->prepare('SELECT * FROM products ORDER BY create_date DESC');
     $statement->execute();
     $products = $statement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -52,4 +52,21 @@ This file will list all our products.
     </tbody>
   </table>
 </main>
+```
+
+> **Note:** the view expects a `$products` array to loop on. We will provide it via controller.
+
+# 3 Add the Controller method
+
+Inside the `ProductController` class, we need to define the `index` method in order to get the products from the database and supply them to the view.
+
+We also need to invoke the router's `renderView` function.
+
+```php
+public function index(Router $router)
+  {
+    $products = $router->db->getProducts();
+
+    return $router->renderView('products/index', ['products' => $products]);
+  }
 ```
