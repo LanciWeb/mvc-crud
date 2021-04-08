@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 namespace app;
 
 use PDO;
@@ -23,5 +24,14 @@ class Database
     $this->pdo = new PDO($dsn, $this->user, $this->password);
     $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     self::$db = $this;
+  }
+
+  public function getProducts()
+  {
+    $statement = $this->pdo->prepare('SELECT * FROM products ORDER_BY create_date DESC');
+    $statement->execute();
+    $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    return $products;
   }
 }
