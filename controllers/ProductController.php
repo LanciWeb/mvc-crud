@@ -8,6 +8,9 @@ class ProductController
 {
   public function index(Router $router)
   {
+
+    if ($_SERVER['REQUEST_METHOD'] !== 'GET') return $router->renderView('404');
+
     $products = $router->db->getProducts();
 
     return $router->renderView('products/index', ['products' => $products]);

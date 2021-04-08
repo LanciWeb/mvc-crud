@@ -70,3 +70,28 @@ public function index(Router $router)
     return $router->renderView('products/index', ['products' => $products]);
   }
 ```
+
+# 4 Add method check and 404 page
+
+## In the controller
+
+To be sure the request is made properly, we can check the `$_SERVER['REQUEST_METHOD']` in the controller.
+
+```php
+if($_SERVER['REQUEST_METHOD'] !== 'GET') return $router->renderView('404');
+
+$products = $router->db->getProducts();
+
+return $router->renderView('products/index', ['products' => $products]);
+
+```
+
+If the method is not the one we expected, we can redirect to a 404 page.
+
+## In the views folder
+
+We can create a `404.php` page in the `views` folder.
+
+```html
+<div class="alert alert-danger" role="alert">Page not found!</div>
+```
