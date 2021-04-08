@@ -26,9 +26,14 @@ class Database
     self::$db = $this;
   }
 
-  public function getProducts()
+  public function getProducts($search)
   {
-    $statement = $this->pdo->prepare('SELECT * FROM products ORDER BY create_date DESC');
+    if ($search) {
+      $statement = $this->pdo->prepare('SELECT * FROM products WHERE title LIKE :search ORDER BY create_date DESC');
+      $statement->bindValue(':search', "%$search%");
+    } else {
+      $statement = $this->pdo->prepare('SELECT * FROM products ORDER BY create_date DESC');
+    }
     $statement->execute();
     $products = $statement->fetchAll(PDO::FETCH_ASSOC);
 

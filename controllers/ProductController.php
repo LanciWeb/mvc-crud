@@ -11,7 +11,8 @@ class ProductController
 
     if ($_SERVER['REQUEST_METHOD'] !== 'GET') return $router->renderView('404');
 
-    $products = $router->db->getProducts();
+    $search = $_GET['search'] ?? '';
+    $products = $router->db->getProducts($search);
 
     return $router->renderView('products/index', ['products' => $products]);
   }
