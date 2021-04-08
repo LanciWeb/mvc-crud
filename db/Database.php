@@ -1,9 +1,9 @@
 <?php
 
-namespace app;
+namespace app\db;
 
 use PDO;
-use app\CONFIG;
+use app\db\CONFIG;
 
 class Database
 {
@@ -28,7 +28,7 @@ class Database
 
   public function getProducts()
   {
-    $statement = $this->pdo->prepare('SELECT * FROM products ORDER_BY create_date DESC');
+    $statement = $this->pdo->prepare('SELECT * FROM products ORDER BY create_date DESC');
     $statement->execute();
     $products = $statement->fetchAll(PDO::FETCH_ASSOC);
 

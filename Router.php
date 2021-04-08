@@ -2,7 +2,7 @@
 
 namespace app;
 
-use app\Database;
+use app\db\Database;
 
 /**
  * Class Router

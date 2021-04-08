@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-namespace app;
+namespace app\db;
 
 /**
  * Class CONFIG
@@ -8,8 +8,8 @@ namespace app;
  * @package app
  */
 
- class CONFIG
- {
+class CONFIG
+{
   public static $dbms = 'mysql';
   public static $host = 'localhost';
   public static $port = '3306';
@@ -17,4 +17,4 @@ namespace app;
 
   public static $user = 'root';
   public static $password = 'mysql';
- }
+}
