@@ -3,6 +3,7 @@
 namespace app\db;
 
 use PDO;
+use Exception;
 use app\db\CONFIG;
 
 class Database
@@ -28,22 +29,32 @@ class Database
 
   public function getProducts($search)
   {
+
     if ($search) {
       $statement = $this->pdo->prepare('SELECT * FROM products WHERE title LIKE :search ORDER BY create_date DESC');
       $statement->bindValue(':search', "%$search%");
     } else {
       $statement = $this->pdo->prepare('SELECT * FROM products ORDER BY create_date DESC');
     }
-    $statement->execute();
-    $products = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    return $products;
+    try {
+      $statement->execute();
+      $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+      return $products;
+    } catch (Exception $e) {
+      var_dump($e->getMessage());
+    }
   }
 
   public function deleteProduct($id)
   {
     $statement = $this->pdo->prepare('DELETE FROM products WHERE id = :id');
     $statement->bindValue('id', $id);
-    $statement->execute();
+
+    try {
+      $statement->execute();
+    } catch (Exception $e) {
+      var_dump($e->getMessage());
+    }
   }
 }

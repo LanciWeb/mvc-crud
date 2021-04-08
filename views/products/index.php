@@ -12,7 +12,7 @@
       </form>
     </div>
   </div>
-  <?php if (count($products)) : ?>
+  <?php if ($products && count($products)) : ?>
     <table class="table">
       <thead>
         <tr>
