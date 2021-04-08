@@ -95,3 +95,19 @@ We can create a `404.php` page in the `views` folder.
 ```html
 <div class="alert alert-danger" role="alert">Page not found!</div>
 ```
+
+# 5 Handle no results
+
+If there are no products, we need to prevent the `priduct/index.php` page from throwing an error.
+
+```php
+<?php if (count($products)) : ?>
+  <table class="table">
+  <!-- Loop over products to form the table -->
+  </table>
+<?php else : ?>
+  <div class="alert alert-info" role="alert">
+    No products found
+  </div>
+<?php endif ?>
+```
