@@ -32,6 +32,12 @@
                 <td><?= $p[$k] ?></td>
               <?php endif ?>
             <?php endforeach ?>
+            <td>
+              <form action="/products/delete" method="post">
+                <input type="hidden" name="id" value="<?= $p['id'] ?>" />
+                <button type="submit" class="btn btn-danger">Delete</button>
+              </form>
+            </td>
           </tr>
         <?php endforeach ?>
       </tbody>

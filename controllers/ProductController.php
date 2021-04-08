@@ -25,7 +25,14 @@ class ProductController
   {
   }
 
-  public function delete()
+  public function delete(Router $router)
   {
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['id'])) return $router->renderView('404');
+
+    $id = $_POST['id'];
+
+    $router->db->deleteProduct($id);
+
+    header('Location: /products');
   }
 }
