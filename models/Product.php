@@ -37,7 +37,8 @@ class Product
     if (empty($errors)) {
       try {
         $db = Database::$db;
-        $db->createProduct($this);
+        if ($this->id) $db->updateProduct($this);
+        else $db->createProduct($this);
       } catch (Exception $e) {
         var_dump($e->getMessage());
       }

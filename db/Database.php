@@ -75,4 +75,38 @@ class Database
       var_dump($e->getMessage());
     }
   }
+
+  public function getProductById($id)
+  {
+    $statement = $this->pdo->prepare("SELECT * from products WHERE id = :id");
+    $statement->bindValue("id", $id);
+
+    try {
+      $statement->execute();
+      $product = $statement->fetch(PDO::FETCH_ASSOC);
+      return $product;
+    } catch (Exception $e) {
+      echo '<pre>';
+      var_dump($e->getMessage());
+      echo '</pre>';
+    }
+  }
+
+  public function updateProduct(Product $product)
+  {
+    $statement = $this->pdo->prepare("UPDATE products SET title=:title, description=:description, price=:price WHERE id=:id");
+
+    $statement->bindValue('id', $product->id);
+    $statement->bindValue('title', $product->title);
+    $statement->bindValue('price', $product->price);
+    $statement->bindValue('description', $product->description);
+
+    try {
+      $statement->execute();
+    } catch (Exception $e) {
+      echo '<pre>';
+      var_dump($e->getMessage());
+      echo '</pre>';
+    }
+  }
 }

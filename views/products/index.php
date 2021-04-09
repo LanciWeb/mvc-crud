@@ -23,13 +23,14 @@
       </div>
     </div>
   </div>
-  <?php if ($products && count($products)) : ?>
+  <?php if ($products && !empty($products)) : ?>
     <table class="table">
       <thead>
         <tr>
           <?php foreach ($products[0] as $k => $v) : ?>
             <th scope="col"><?= ucfirst($k) ?></th>
           <?php endforeach ?>
+          <th scope="col"></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -47,6 +48,12 @@
               <form action="/products/delete" method="post">
                 <input type="hidden" name="id" value="<?= $p['id'] ?>" />
                 <button type="submit" class="btn btn-danger">Delete</button>
+              </form>
+            </td>
+            <td>
+              <form action="/products/update" method="get">
+                <input type="hidden" name="id" value="<?= $p['id'] ?>" />
+                <button type="submit" class="btn btn-primary">Edit</button>
               </form>
             </td>
           </tr>
