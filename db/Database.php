@@ -5,6 +5,7 @@ namespace app\db;
 use PDO;
 use Exception;
 use app\db\CONFIG;
+use app\models\Product;
 
 class Database
 {
@@ -53,6 +54,23 @@ class Database
 
     try {
       $statement->execute();
+    } catch (Exception $e) {
+      var_dump($e->getMessage());
+    }
+  }
+
+  public function createProduct(Product $product)
+  {
+    $statement = $this->pdo->prepare("INSERT INTO products (title, description, price, create_date) VALUES (:title, :description, :price, :create_date)");
+
+    $statement->bindValue('title', $product->title);
+    $statement->bindValue('description', $product->description);
+    $statement->bindValue('price', $product->price);
+    $statement->bindValue('create_date', date("Y-m-d: H:i:s"));
+
+    try {
+      $statement->execute();
+      header('Location: index.php');
     } catch (Exception $e) {
       var_dump($e->getMessage());
     }

@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\Router;
+use app\models\Product;
 
 class ProductController
 {
@@ -17,8 +18,35 @@ class ProductController
     return $router->renderView('products/index', ['products' => $products]);
   }
 
-  public function create()
+  public function create(Router $router)
   {
+    $errors = [];
+    $productData = [
+      'title' => '',
+      'image' => '',
+      'price' => '',
+      'description' => '',
+    ];
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $productData['title'] = $_POST['title'];
+      $productData['description'] = $_POST['description'];
+      $productData['price'] = (float)$_POST['price'];
+
+
+      $product = new Product();
+      $product->load($productData);
+      $errors = $product->save();
+      if (empty($errors)) {
+        header('Location: /products?success=created');
+        exit;
+      }
+    }
+
+    $router->renderView('products/create', [
+      'errors' => $errors,
+      'product' => $productData
+    ]);
   }
 
   public function update()

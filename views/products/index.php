@@ -2,6 +2,12 @@
   <header>
     <h1>Products</h1>
   </header>
+
+  <?php if ($_GET['success']) : ?>
+    <div class="alert alert-success" role="alert">
+      The product was successfully <?= $_GET['success'] ?>!
+    </div>
+  <?php endif ?>
   <div class="row">
     <div class="col offset-md-6 offset-lg-8 col-lg-3">
       <form action="" method="get">
@@ -10,6 +16,11 @@
           <button class="btn btn-outline-secondary" type="submit">Search</button>
         </div>
       </form>
+    </div>
+    <div class="col col-md-2 col-lg-1">
+      <div class="d-flex justify-content-end">
+        <a href="/products/create" type="button" class="btn btn-success">Create</a>
+      </div>
     </div>
   </div>
   <?php if ($products && count($products)) : ?>

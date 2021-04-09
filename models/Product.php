@@ -2,6 +2,9 @@
 
 namespace app\models;
 
+use Exception;
+use app\db\Database;
+
 /**
  * Class Product  
  * 
@@ -17,13 +20,28 @@ class Product
   public $imagePath = null;
   public $imageFile = null;
 
-  //Some logics to load the data into a Product instance
   public function load($data)
   {
+    $this->id = $data['id'] ?? null;
+    $this->title = $data['title'] ?? null;
+    $this->price = $data['price'] ?? null;
+    $this->description = $data['description'] ?? null;
   }
 
-  //Some logics to load the data into a Product instance
   public function save()
   {
+    $errors = [];
+    if (!$this->title) $errors[] = 'Product title is required!';
+    if (!$this->price) $errors[] = 'Product price is required!';
+
+    if (empty($errors)) {
+      try {
+        $db = Database::$db;
+        $db->createProduct($this);
+      } catch (Exception $e) {
+        var_dump($e->getMessage());
+      }
+    }
+    return $errors;
   }
 }
