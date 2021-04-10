@@ -61,11 +61,12 @@ class Database
 
   public function createProduct(Product $product)
   {
-    $statement = $this->pdo->prepare("INSERT INTO products (title, description, price, create_date) VALUES (:title, :description, :price, :create_date)");
+    $statement = $this->pdo->prepare("INSERT INTO products (title, description, price, create_date, image) VALUES (:title, :description, :price, :create_date, :image)");
 
     $statement->bindValue('title', $product->title);
     $statement->bindValue('description', $product->description);
     $statement->bindValue('price', $product->price);
+    $statement->bindValue('image', $product->imagePath);
     $statement->bindValue('create_date', date("Y-m-d: H:i:s"));
 
     try {
@@ -94,12 +95,13 @@ class Database
 
   public function updateProduct(Product $product)
   {
-    $statement = $this->pdo->prepare("UPDATE products SET title=:title, description=:description, price=:price WHERE id=:id");
+    $statement = $this->pdo->prepare("UPDATE products SET title=:title, description=:description, price=:price, image=:image WHERE id=:id");
 
     $statement->bindValue('id', $product->id);
     $statement->bindValue('title', $product->title);
     $statement->bindValue('price', $product->price);
     $statement->bindValue('description', $product->description);
+    $statement->bindValue('image', $product->imagePath);
 
     try {
       $statement->execute();

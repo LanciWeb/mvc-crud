@@ -40,6 +40,8 @@
             <?php foreach ($p as $k => $v) : ?>
               <?php if ($k === 'id') : ?>
                 <th scope="row"><?= $p[$k] ?></th>
+              <?php elseif ($k === 'image') : ?>
+                <td><img src="<?= $p['image'] ?>" alt="<?= $p['title'] ?>" width="80" class="img-fluid" /></td>
               <?php else : ?>
                 <td><?= $p[$k] ?></td>
               <?php endif ?>

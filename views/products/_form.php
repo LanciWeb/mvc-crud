@@ -9,7 +9,12 @@
 </section>
 
 <section>
-  <form method="post" action="">
+  <form method="post" action="" enctype="multipart/form-data">
+    <div class="mb3">
+      <?php if ($product['image']) : ?><figure><img src="/<?= $product['image'] ?>" class="img-fluid" width="100" /></figure> <?php endif; ?>
+      <label for="image" class="form-label">Image</label>
+      <input type="file" name="image" id="image" />
+    </div>
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
       <input type="text" class="form-control" name="title" id="title" value="<?= $product['title'] ?>" />
